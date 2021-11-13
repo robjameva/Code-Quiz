@@ -3,6 +3,9 @@ var titleEl = document.querySelector("#title");
 var startEl = document.querySelector("#start");
 var startContainerEl = document.querySelector(".start-btn")
 var buttensEl = document.querySelector(".btns");
+var saveEl = document.createElement("button");
+var playAgainEl = document.createElement("button");
+
 
 var timer = 30;
 var playerPoints = 0;
@@ -16,14 +19,21 @@ var answers = {
     ans3: ["<angled brackets>", "Both of the Above", "for loop", "startDebugger;", "localStorage.getData();"],
     ans4: ["|pipes|", "None of the Above", "boolean", "error;", "localStorage.setItem();"]
 }
+var playerObj = {
+    playerName: "",
+    playerScore: 0
+}
+
 
 var setTimer = function () {
     var intervalId = setInterval(function () {
         timerEl.textContent = "Time Remaining: " + timer;
         //function;
         timer -= 1;
-        if (timer == -1 || questionNum > 5) {
+        if (timer == -1 || questionNum > 4) {
             clearInterval(intervalId)
+            calculateFinalScore();
+            deleteBtns();
         }
     }, 1000);
 }
@@ -46,6 +56,18 @@ var createBtns = function () {
     buttensEl.appendChild(ans4);
 }
 
+var deleteBtns = function () {
+    var ans1El = document.querySelector("#answer-1");
+    var ans2El = document.querySelector("#answer-2");
+    var ans3El = document.querySelector("#answer-3");
+    var ans4El = document.querySelector("#answer-4");
+
+    buttensEl.removeChild(ans1El);
+    buttensEl.removeChild(ans2El);
+    buttensEl.removeChild(ans3El);
+    buttensEl.removeChild(ans4El);
+}
+
 var nextQuestion = function () {
     var ans1El = document.querySelector("#answer-1");
     var ans2El = document.querySelector("#answer-2");
@@ -60,14 +82,6 @@ var nextQuestion = function () {
         ans3El.textContent = answers.ans3[questionNum];
         ans4El.textContent = answers.ans4[questionNum];
     }
-    else {
-        titleEl.textContent = "You Finished The Game!";
-        buttensEl.removeChild(ans1El);
-        buttensEl.removeChild(ans2El);
-        buttensEl.removeChild(ans3El);
-        buttensEl.removeChild(ans4El);
-
-    }
 }
 
 var getUserAnswer = function (event) {
@@ -78,7 +92,7 @@ var getUserAnswer = function (event) {
 }
 
 var rightAnswer = function () {
-    playerPoints += 1;
+    playerPoints += 5;
     timer += 5;
 };
 
@@ -104,14 +118,52 @@ var calculatePoints = function (answer) {
             answer.matches("#answer-4") ? rightAnswer() : wrongAnswer();
             break;
     }
-    console.log("Player has " + playerPoints + " points")
+}
+
+var calculateFinalScore = function () {
+    playerPoints += timer;
+    titleEl.textContent = "You Finished The Game with: " + playerPoints + " points!";
+
+    saveEl.setAttribute("id", "save");
+    saveEl.textContent = "Save Score"
+    buttensEl.appendChild(saveEl);
+
+    playAgainEl.setAttribute("id", "play-again");
+    playAgainEl.textContent = "Play Again"
+    buttensEl.appendChild(playAgainEl);
+}
+
+var saveScore = function () {
+    var getName = prompt("Please enter your name");
+    playerObj.playerName = getName;
+    playerObj.playerScore = playerPoints;
+
+    var savedScore = JSON.stringify(playerObj);
+    localStorage.setItem("score", savedScore)
+
 }
 
 var startGame = function () {
     // Remove Start Game button
     startContainerEl.removeChild(startEl)
+
     // Aligns text to the left by removing the class of "center" from the title element
     titleEl.removeAttribute("class")
+
+    setTimer();
+    createBtns();
+    nextQuestion();
+}
+
+var rePlay = function () {
+    timer = 30;
+    playerPoints = 0;
+    questionNum = 0;
+    playerObj.playerName = ""
+    playerObj.playerScore = 0;
+
+    buttensEl.removeChild(saveEl);
+    buttensEl.removeChild(playAgainEl);
 
     setTimer();
     createBtns();
@@ -122,6 +174,7 @@ var startGame = function () {
 
 
 
-
 startEl.addEventListener("click", startGame)
 buttensEl.addEventListener("click", getUserAnswer)
+playAgainEl.addEventListener("click", rePlay)
+saveEl.addEventListener("click", saveScore);
