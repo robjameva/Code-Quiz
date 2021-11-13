@@ -1,0 +1,62 @@
+/* Global Section */
+:root {
+    --primary-color: #3d4c41;
+    --secondary-color: #999999;
+    --tertiary-color: #e6e6e6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+/* Header*/
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header div {
+    padding: 20px;
+    margin: 15px;
+}
+
+header #timer {
+    margin-right: 60px;
+}
+
+#underline {
+    border-bottom: solid black 1px;;
+}
+
+/* Main Section */
+main {
+    display: flex;
+    justify-content: center;
+}
+
+main h1 {
+    margin-bottom: 3vw;
+}
+
+.flex-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 700px;
+    width: 50%;
+    flex-direction: column;
+    text-align: left;
+}
+
+
+button {
+    background-color: lightblue;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    width: 250px;
+    display: block;
+}
