@@ -7,7 +7,7 @@ var buttensEl = document.querySelector(".btns");
 var timer = 30;
 var playerPoints = 0;
 var questionNum = 0;
-var questions = ["Which of the following characters are used for hold an object in JS?", "JavaScript can be used to write:",
+var questions = ["Which of the following characters are used to objects in JS?", "JavaScript can be used to write:",
     "Which of the following is not a valid JavaScript data type?", "How do add a debug statement in JavaScript?",
     "How do you persist data using only JavaScript in the browser?"];
 var answers = {
@@ -62,7 +62,6 @@ var nextQuestion = function () {
     }
     else {
         titleEl.textContent = "You Finished The Game!";
-        console.log(buttensEl)
         buttensEl.removeChild(ans1El);
         buttensEl.removeChild(ans2El);
         buttensEl.removeChild(ans3El);
