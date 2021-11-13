@@ -1,15 +1,29 @@
+var timerEl = document.querySelector("#timer");
 var titleEl = document.querySelector("#title");
 var startEl = document.querySelector("#start");
 var startContainerEl = document.querySelector(".start-btn")
 var buttensEl = document.querySelector(".btns");
 
+var timer = 30;
+var playerPoints = 0;
 var questionNum = 0;
-var questions = ["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"];
+var questions = ["Which of the following characters are used for hold an object in JS?", "JavaScript can be used to write:", "Question 3", "Question 4", "Question 5"];
 var answers = {
-    ans1: ["test1", "test5", "test9", "test13", "test17"],
-    ans2: ["test2", "test6", "test10", "test14", "test18"],
-    ans3: ["test3", "test7", "test11", "test15", "test19"],
-    ans4: ["test4", "test8", "test12", "test16", "test20"]
+    ans1: ["[square brackets]", "Front End Code", "test9", "test13", "test17"],
+    ans2: ["{curley brackets}", "Back End Code", "test10", "test14", "test18"],
+    ans3: ["<angled brackets>", "Both of the Above", "test11", "test15", "test19"],
+    ans4: ["|pipes|", "test8", "None of the Above", "test16", "test20"]
+}
+
+var setTimer = function () {
+    var intervalId = setInterval(function () {
+        timerEl.textContent = "Time Remaining: " + timer;
+        //function;
+        timer -= 1;
+        if (timer == -1 || questionNum > 5) {
+            clearInterval(intervalId)
+        }
+    }, 1000);
 }
 
 var createBtns = function () {
@@ -28,47 +42,80 @@ var createBtns = function () {
     var ans4 = document.createElement("button");
     ans4.setAttribute("id", "answer-4");
     buttensEl.appendChild(ans4);
-
 }
 
 var nextQuestion = function () {
-    titleEl.textContent = questions[questionNum];
-
     var ans1El = document.querySelector("#answer-1");
     var ans2El = document.querySelector("#answer-2");
     var ans3El = document.querySelector("#answer-3");
     var ans4El = document.querySelector("#answer-4");
 
-    ans1El.textContent = answers.ans1[questionNum];
-    ans2El.textContent = answers.ans2[questionNum];
-    ans3El.textContent = answers.ans3[questionNum];
-    ans4El.textContent = answers.ans4[questionNum];
-    questionNum++;
+    if (questionNum < 5) {
+        titleEl.textContent = questions[questionNum];
+
+        ans1El.textContent = answers.ans1[questionNum];
+        ans2El.textContent = answers.ans2[questionNum];
+        ans3El.textContent = answers.ans3[questionNum];
+        ans4El.textContent = answers.ans4[questionNum];
+    }
+    else {
+        titleEl.textContent = "You Finished The Game!";
+        console.log(buttensEl)
+        buttensEl.removeChild(ans1El);
+        buttensEl.removeChild(ans2El);
+        buttensEl.removeChild(ans3El);
+        buttensEl.removeChild(ans4El);
+
+    }
 }
 
-
-var startGame = function () {
-    createBtns();
-    startContainerEl.removeChild(startEl)
+var getUserAnswer = function (event) {
+    var userAnswerEl = event.target;
+    calculatePoints(userAnswerEl);
+    questionNum++;
     nextQuestion();
 }
 
+var rightAnswer = function () {
+    playerPoints += 1;
+    timer += 5;
+};
 
+var wrongAnswer = function () {
+    timer -= 3;
+}
 
+var calculatePoints = function (answer) {
+    switch (questionNum) {
+        case 0:
+            answer.matches("#answer-2") ? rightAnswer() : wrongAnswer();
+            break;
+        case 1:
+            answer.matches("#answer-3") ? rightAnswer() : wrongAnswer();
+            break;
+        case 2:
+            answer.matches("#answer-3") ? rightAnswer() : wrongAnswer();
+            break;
+        case 3:
+            answer.matches("#answer-4") ? rightAnswer() : wrongAnswer();
+            break;
+        case 4:
+            answer.matches("#answer-4") ? rightAnswer() : wrongAnswer();
+            break;
+    }
+    console.log("Player has " + playerPoints + " points")
+}
 
-// when click on start game
+var startGame = function () {
+    // Remove Start Game button
+    startContainerEl.removeChild(startEl)
+    // Aligns text to the left by removing the class of "center" from the title element
+    titleEl.removeAttribute("class")
 
-//show new quesions
-
-
-//show new answer options
-// create 4 buttons
-// add those buttons to the container
-// add text to the buttons based on the question
-
-
-
-
+    setTimer();
+    createBtns();
+    nextQuestion();
+}
 
 
 
@@ -76,4 +123,4 @@ var startGame = function () {
 
 
 startEl.addEventListener("click", startGame)
-buttensEl.addEventListener("click", nextQuestion)
+buttensEl.addEventListener("click", getUserAnswer)
