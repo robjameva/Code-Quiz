@@ -7,12 +7,14 @@ var buttensEl = document.querySelector(".btns");
 var timer = 30;
 var playerPoints = 0;
 var questionNum = 0;
-var questions = ["Which of the following characters are used for hold an object in JS?", "JavaScript can be used to write:", "Question 3", "Question 4", "Question 5"];
+var questions = ["Which of the following characters are used for hold an object in JS?", "JavaScript can be used to write:",
+    "Which of the following is not a valid JavaScript data type?", "How do add a debug statement in JavaScript?",
+    "How do you persist data using only JavaScript in the browser?"];
 var answers = {
-    ans1: ["[square brackets]", "Front End Code", "test9", "test13", "test17"],
-    ans2: ["{curley brackets}", "Back End Code", "test10", "test14", "test18"],
-    ans3: ["<angled brackets>", "Both of the Above", "test11", "test15", "test19"],
-    ans4: ["|pipes|", "test8", "None of the Above", "test16", "test20"]
+    ans1: ["[square brackets]", "Front End Code", "number", "debugger;", "data.persist();"],
+    ans2: ["{curley brackets}", "Back End Code", "string", "fixError;", "persist.data();"],
+    ans3: ["<angled brackets>", "Both of the Above", "for loop", "startDebugger;", "localStorage.getData();"],
+    ans4: ["|pipes|", "None of the Above", "boolean", "error;", "localStorage.setItem();"]
 }
 
 var setTimer = function () {
@@ -97,7 +99,7 @@ var calculatePoints = function (answer) {
             answer.matches("#answer-3") ? rightAnswer() : wrongAnswer();
             break;
         case 3:
-            answer.matches("#answer-4") ? rightAnswer() : wrongAnswer();
+            answer.matches("#answer-1") ? rightAnswer() : wrongAnswer();
             break;
         case 4:
             answer.matches("#answer-4") ? rightAnswer() : wrongAnswer();
