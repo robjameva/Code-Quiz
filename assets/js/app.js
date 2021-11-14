@@ -143,15 +143,16 @@ var saveScore = function () {
 
     var savedScore = JSON.stringify(playerObj);
     localStorage.setItem("Player ID: " + playerId, savedScore)
-    playerId++;
 }
 
 var loadHighScore = function () {
     highScores = [];
     for (var i = 0; i < localStorage.length; i++) {
-        playerId++;
+        var score = localStorage.getItem("Player ID: " + i)
+        highScores.push(JSON.parse(score));
     }
-
+    playerId = highScores.length;
+    console.log(highScores);
 }
 
 var startGame = function () {
@@ -167,8 +168,7 @@ var startGame = function () {
     nextQuestion();
 }
 
-var rePlay = function (event) {
-    event.stopPropagation();
+var resetGame = function () {
     timer = 30;
     playerPoints = 0;
     questionNum = 0;
@@ -177,7 +177,12 @@ var rePlay = function (event) {
 
     buttensEl.removeChild(saveEl);
     buttensEl.removeChild(playAgainEl);
+}
 
+var rePlay = function (event) {
+    event.stopPropagation();
+    loadHighScore();
+    resetGame();
     setTimer();
     createBtns();
     nextQuestion();
