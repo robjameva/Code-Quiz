@@ -8,7 +8,6 @@ var playAgainEl = document.createElement("button");
 var highScoreBtnEl = document.querySelector("#high-score-btn");
 
 
-
 var timer = 30;
 var playerId = 0;
 var playerPoints = 0;
@@ -27,7 +26,6 @@ var playerObj = {
     playerName: "",
     playerScore: 0
 }
-
 
 var setTimer = function () {
     var intervalId = setInterval(function () {
@@ -160,8 +158,6 @@ var loadHighScore = function () {
 var viewHighScores = function () {
     location.href = "./high_score.html";
 }
-
-
 
 var startGame = function () {
     loadHighScore();

@@ -69,3 +69,17 @@ button {
     display: block;
     font-weight: bold;
 }
+
+#timer {
+    align-self: center;
+}
+
+ol {
+    padding: 15px;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+li {
+    margin: 35px;
+}
