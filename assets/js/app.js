@@ -8,6 +8,7 @@ var playAgainEl = document.createElement("button");
 
 
 var timer = 30;
+var playerId = 0;
 var playerPoints = 0;
 var questionNum = 0;
 var questions = ["Which of the following characters are used to objects in JS?", "JavaScript can be used to write:",
@@ -20,6 +21,7 @@ var answers = {
     ans4: ["|pipes|", "None of the Above", "boolean", "error;", "localStorage.setItem();"]
 }
 var playerObj = {
+    playerId: 0,
     playerName: "",
     playerScore: 0
 }
@@ -135,15 +137,25 @@ var calculateFinalScore = function () {
 
 var saveScore = function () {
     var getName = prompt("Please enter your name");
+    playerObj.playerId = playerId;
     playerObj.playerName = getName;
     playerObj.playerScore = playerPoints;
 
     var savedScore = JSON.stringify(playerObj);
-    localStorage.setItem("score", savedScore)
+    localStorage.setItem("Player ID: " + playerId, savedScore)
+    playerId++;
+}
+
+var loadHighScore = function () {
+    highScores = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        playerId++;
+    }
 
 }
 
 var startGame = function () {
+    loadHighScore();
     // Remove Start Game button
     startContainerEl.removeChild(startEl)
 
@@ -155,7 +167,8 @@ var startGame = function () {
     nextQuestion();
 }
 
-var rePlay = function () {
+var rePlay = function (event) {
+    event.stopPropagation();
     timer = 30;
     playerPoints = 0;
     questionNum = 0;
