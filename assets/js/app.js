@@ -6,13 +6,14 @@ var buttensEl = document.querySelector(".btns");
 var saveEl = document.createElement("button");
 var playAgainEl = document.createElement("button");
 var highScoreBtnEl = document.querySelector("#high-score-btn");
+var responseEl = document.querySelector(".response")
 
 
 var timer = 30;
 var playerId = 0;
 var playerPoints = 0;
 var questionNum = 0;
-var questions = ["Which of the following characters are used to objects in JS?", "JavaScript can be used to write:",
+var questions = ["Which of the following characters are used to hold objects in JS?", "JavaScript can be used to write:",
     "Which of the following is not a valid JavaScript data type?", "How do add a debug statement in JavaScript?",
     "How do you persist data using only JavaScript in the browser?"];
 var answers = {
@@ -96,10 +97,41 @@ var getUserAnswer = function (event) {
 var rightAnswer = function () {
     playerPoints += 5;
     timer += 5;
+
+    var correct = document.createElement("p");
+    correct.setAttribute("id", "response");
+    correct.textContent = "You are correct 🎉"
+    responseEl.appendChild(correct);
+
+    responseTimer();
 };
 
 var wrongAnswer = function () {
     timer -= 3;
+
+    var wrong = document.createElement("p");
+    wrong.setAttribute("id", "response");
+    wrong.textContent = "Sorry, wrong asnwer 🙁"
+    responseEl.appendChild(wrong);
+
+    responseTimer();
+}
+
+
+var responseTimer = function () {
+    var localTimer = 0
+    var intervalId = setInterval(function () {
+        localTimer++
+        if (localTimer == 1) {
+            clearInterval(intervalId)
+            removeResponse();
+        }
+    }, 1000);
+}
+
+var removeResponse = function () {
+    var responseChildEl = document.querySelector("#response");
+    responseEl.removeChild(responseChildEl);
 }
 
 var calculatePoints = function (answer) {

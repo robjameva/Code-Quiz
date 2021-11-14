@@ -44,7 +44,7 @@ main h1 {
 .flex-wrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     height: 700px;
     width: 50%;
     flex-direction: column;
@@ -53,10 +53,6 @@ main h1 {
 
 .center {
     text-align: center;
-}
-
-.start-btn, .back {
-    align-self: center;
 }
 
 
