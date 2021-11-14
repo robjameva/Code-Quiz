@@ -5,6 +5,8 @@ var startContainerEl = document.querySelector(".start-btn")
 var buttensEl = document.querySelector(".btns");
 var saveEl = document.createElement("button");
 var playAgainEl = document.createElement("button");
+var highScoreBtnEl = document.querySelector("#high-score-btn");
+
 
 
 var timer = 30;
@@ -155,6 +157,12 @@ var loadHighScore = function () {
     console.log(highScores);
 }
 
+var viewHighScores = function () {
+    location.href = "./high_score.html";
+}
+
+
+
 var startGame = function () {
     loadHighScore();
     // Remove Start Game button
@@ -192,7 +200,8 @@ var rePlay = function (event) {
 
 
 
-startEl.addEventListener("click", startGame)
-buttensEl.addEventListener("click", getUserAnswer)
-playAgainEl.addEventListener("click", rePlay)
+startEl.addEventListener("click", startGame);
+buttensEl.addEventListener("click", getUserAnswer);
+playAgainEl.addEventListener("click", rePlay);
 saveEl.addEventListener("click", saveScore);
+highScoreBtnEl.addEventListener("click", viewHighScores);

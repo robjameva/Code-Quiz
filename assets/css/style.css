@@ -55,7 +55,7 @@ main h1 {
     text-align: center;
 }
 
-.start-btn {
+.start-btn, .back {
     align-self: center;
 }
 
