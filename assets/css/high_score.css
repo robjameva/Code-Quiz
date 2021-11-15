@@ -1,8 +1,7 @@
 /* Global Section */
 :root {
-    --primary-color: #3d4c41;
-    --secondary-color: #999999;
-    --tertiary-color: #e6e6e6;
+    --primary-color: #002B70;
+    --secondary-color: #498AF2;
 }
 
 * {
@@ -57,22 +56,33 @@ main h1 {
 
 
 button {
-    background-color: lightblue;
-    padding: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.2em;
+    padding: 15px;
     margin: 5px;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 250px;
     display: block;
     font-weight: bold;
 }
 
+button:hover {
+    background-color: var(--secondary-color);
+}
+
 #timer {
     align-self: center;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 ol {
     padding: 15px;
-    background-color: lightblue;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
     border-radius: 10px;
 }
 

@@ -1,3 +1,4 @@
+// HTML Element Selectors
 var timerEl = document.querySelector("#timer");
 var titleEl = document.querySelector("#title");
 var startEl = document.querySelector("#start");
@@ -8,7 +9,7 @@ var playAgainEl = document.createElement("button");
 var highScoreBtnEl = document.querySelector("#high-score-btn");
 var responseEl = document.querySelector(".response")
 
-
+// Gloabl Variables
 var timer = 30;
 var playerId = 0;
 var playerPoints = 0;
@@ -28,6 +29,7 @@ var playerObj = {
     playerScore: 0
 }
 
+// Game Logic
 var setTimer = function () {
     var intervalId = setInterval(function () {
         timerEl.textContent = "Time Remaining: " + timer;
@@ -117,7 +119,6 @@ var wrongAnswer = function () {
     responseTimer();
 }
 
-
 var responseTimer = function () {
     var localTimer = 0
     var intervalId = setInterval(function () {
@@ -126,7 +127,7 @@ var responseTimer = function () {
             clearInterval(intervalId)
             removeResponse();
         }
-    }, 1000);
+    }, 1500);
 }
 
 var removeResponse = function () {
@@ -158,6 +159,10 @@ var calculateFinalScore = function () {
     playerPoints += timer;
     titleEl.textContent = "You Finished The Game with: " + playerPoints + " points!";
 
+    showEndGameBtns();
+}
+
+var showEndGameBtns = function () {
     saveEl.setAttribute("id", "save");
     saveEl.textContent = "Save Score"
     buttensEl.appendChild(saveEl);
@@ -224,10 +229,7 @@ var rePlay = function (event) {
     nextQuestion();
 }
 
-
-
-
-
+// Event Listeners
 startEl.addEventListener("click", startGame);
 buttensEl.addEventListener("click", getUserAnswer);
 playAgainEl.addEventListener("click", rePlay);
