@@ -193,7 +193,7 @@ var loadHighScore = function () {
 }
 
 var viewHighScores = function () {
-    location.href = "./high_score.html";
+    location.href = "high_score.html";
 }
 
 var startGame = function () {
