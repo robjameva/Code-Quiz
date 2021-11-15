@@ -12,5 +12,5 @@ This project makes use of built in web APIs such as local storage, time interval
 ## Can you beat the high score?
 https://robjameva.github.io/Code-Quiz/
 
-![home page screenshot](assets/images/screen-shot.png?raw=true)
+![home page screenshot](assets/images/Screen_Shot.png?raw=true)
 
