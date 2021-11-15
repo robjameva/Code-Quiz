@@ -5,7 +5,7 @@ var highScores = [];
 var topFive = [];
 
 var goHome = function () {
-    location.href = "index.html";
+    window.location.href = "index.html";
 }
 
 var loadHighScore = function () {
